@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Home — Acme Company{% endblock %}
+{% block content %}
+<section class="hero">
+  <span class="eyebrow">Welcome</span>
+  <h1>Company Homepage</h1>
+  <p class="lead">
+    Membangun produk berkualitas dengan tim yang berdedikasi. Jelajahi inventori
+    dan temukan solusi terbaik untuk kebutuhan Anda.
+  </p>
+  <div class="meta-bar">
+    🕒 The current date and time is: {% now "DATETIME_FORMAT" %}
+  </div>
+</section>
+
+<div class="section-head">
+  <h2>Our Inventory</h2>
+  <p>There are {{ inventory_list|length }} items of inventory.</p>
+</div>
+
+<div class="card-grid">
+  {% for item in inventory_list %}
+  <div class="card">
+    <div class="icon">📦</div>
+    <h3>{{ item }}</h3>
+    <span class="tag">In stock</span>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="banner">
+  {{ greeting|title }}
+</div>
+{% comment %}Add more content here!{% endcomment %}
+{% endblock %}

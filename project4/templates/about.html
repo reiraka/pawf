@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}About — Acme Company{% endblock %}
+{% block content %}
+<div class="about-card">
+  <h1>Company About Page</h1>
+  <p class="intro">
+    Kami senang Anda ingin terhubung. Berikut informasi kontak resmi perusahaan kami.
+  </p>
+
+  <div class="contact-list">
+    <div class="contact-item">
+      <div class="icon">📍</div>
+      <div>
+        <div class="label">Address</div>
+        <div class="value">{{ contact_address }}</div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="icon">📞</div>
+      <div>
+        <div class="label">Phone</div>
+        <div class="value">{{ phone_number }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
