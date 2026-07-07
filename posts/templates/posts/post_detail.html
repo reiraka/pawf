@@ -1,0 +1,34 @@
+{% extends "posts/base.html" %}
+
+{% block title %}{{ post.title }} — Glacirey{% endblock %}
+
+{% block content %}
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+
+<article class="article">
+  <header class="article-head tilt-soft">
+    <p class="hero-kicker">// ARTIKEL</p>
+    <h1 class="article-title">{{ post.title }}</h1>
+    <p class="article-meta">
+      {{ post.created_at|date:"d F Y" }} · {{ post.reading_time }} menit baca · 👁 {{ post.views }} dilihat
+    </p>
+
+    <div class="article-actions">
+      {% csrf_token %}
+      <button id="like-btn" class="btn-like {% if liked %}liked{% endif %}"
+              data-url="{% url 'post_like' post.slug %}" type="button">
+        <span class="heart">♥</span> <span id="like-count">{{ post.likes }}</span>
+      </button>
+      <button id="tts-btn" class="btn-ghost" type="button">🔊 Dengarkan artikel</button>
+    </div>
+  </header>
+
+  <div class="article-body" id="article-body">
+    {{ post.content|linebreaks }}
+  </div>
+
+  <footer class="article-foot">
+    <a href="{% url 'post_list' %}" class="btn-ghost">← Kembali ke semua artikel</a>
+  </footer>
+</article>
+{% endblock %}

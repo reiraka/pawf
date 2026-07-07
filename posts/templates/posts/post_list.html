@@ -1,0 +1,59 @@
+{% extends "posts/base.html" %}
+
+{% block title %}Glacirey — Blog Semi-3D{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-kicker">// PROJECT 5 — BLOG</p>
+    <h1 class="hero-title">
+      <span class="line">Tulisan yang</span>
+      <span class="line accent">membeku</span>
+      <span class="line">dalam dimensi.</span>
+    </h1>
+    <p class="hero-sub">Blog dengan tampilan semi-3D: kartu yang mengikuti kursor, lapisan parallax, dan fitur interaktif tanpa reload.</p>
+  </div>
+
+  <div class="hero-stage" aria-hidden="true">
+    <div class="ice-cube" id="hero-cube">
+      <span class="face f-front"></span>
+      <span class="face f-back"></span>
+      <span class="face f-left"></span>
+      <span class="face f-right"></span>
+      <span class="face f-top"></span>
+      <span class="face f-bottom"></span>
+    </div>
+    <div class="cube-shadow"></div>
+  </div>
+</section>
+
+{% if query %}
+<p class="search-info">Hasil pencarian untuk “{{ query }}” — {{ posts|length }} artikel. <a href="{% url 'post_list' %}">Reset</a></p>
+{% endif %}
+
+<section class="cards" id="cards">
+  {% for post in posts %}
+  <a href="{{ post.get_absolute_url }}" class="card tilt" style="--i: {{ forloop.counter0 }}">
+    <div class="card-inner">
+      <div class="card-shine"></div>
+      <p class="card-meta">
+        <span>{{ post.created_at|date:"d M Y" }}</span>
+        <span>· {{ post.reading_time }} mnt baca</span>
+      </p>
+      <h2 class="card-title">{{ post.title }}</h2>
+      <p class="card-excerpt">{{ post.excerpt|truncatechars:140 }}</p>
+      <div class="card-foot">
+        <span class="chip">👁 {{ post.views }}</span>
+        <span class="chip">♥ {{ post.likes }}</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </div>
+  </a>
+  {% empty %}
+  <div class="empty">
+    <p>Belum ada artikel{% if query %} yang cocok{% endif %}.</p>
+    <p class="empty-hint">Tambahkan lewat <a href="/admin/">halaman admin</a>.</p>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}
